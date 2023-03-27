@@ -24,6 +24,15 @@
     <#Include Label="IsTransitiveDigraph">
   </Section>
 
+  <Section><Heading>Edge Weights</Heading>
+    <#Include Label="EdgeWeights">
+    <#Include Label="EdgeWeightedDigraph">
+    <#Include Label="DigraphEdgeWeightedMinimumSpanningTree">
+    <#Include Label="DigraphEdgeWeightedShortestPathsFromVertex">
+    <#Include Label="DigraphEdgeWeightedShortestPaths">
+    <#Include Label="DigraphMaximumFlow">  
+  </Section>
+
   <Section><Heading>Orders</Heading>
     <#Include Label="IsPreorderDigraph">
     <#Include Label="IsPartialOrderDigraph">
