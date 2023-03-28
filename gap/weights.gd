@@ -38,7 +38,7 @@ DeclareOperation("RandomUniqueEdgeWeightedDigraph", [IsFunction, IsPosInt, IsRat
 # 7. Painting Edge Weighted Digraph
 DeclareOperation("DigraphFromPaths", [IsDigraph, IsRecord]);
 DeclareOperation("DigraphFromPath", [IsDigraph, IsRecord, IsPosInt]);
-DeclareOperation("DotColoredSubdigraphDigraph", [IsDigraph, IsDigraph, IsRecord]);
+DeclareOperation("DotEdgeWeightedDigraph", [IsDigraph, IsDigraph, IsRecord]);
 
 
 

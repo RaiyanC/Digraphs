@@ -832,54 +832,57 @@ DIGRAPHS_Generate_Unique_Weights := function(digraph)
     return weights;
 end;
 
-InstallMethod(RandomUniqueEdgeWeightedDigraph, "for a pos int", [IsPosInt],
-function(n)
+DIGRAPHS_Random_Edge_Weighted_Digraph := function(n)
     local digraph, weights;
 
     digraph := RandomDigraphCons(IsImmutableDigraph, n);
     weights := DIGRAPHS_Generate_Unique_Weights(digraph);
 
     return EdgeWeightedDigraph(digraph, weights);
+end;
+
+DIGRAPHS_Random_Edge_Weighted_Digraph := function(n, p)
+    local digraph, weights;
+
+    digraph := RandomDigraphCons(IsImmutableDigraph, n, p);
+    weights := DIGRAPHS_Generate_Unique_Weights(digraph);
+
+    return EdgeWeightedDigraph(digraph, weights);
+end;
+
+DIGRAPHS_Random_Edge_Weighted_Digraph := function(filt, n, p)
+    local digraph, weights;
+
+    digraph := RandomDigraphCons(filt, n, p);
+    weights := DIGRAPHS_Generate_Unique_Weights(digraph);
+
+    return EdgeWeightedDigraph(digraph, weights);
+end;
+
+
+InstallMethod(RandomUniqueEdgeWeightedDigraph, "for a pos int", [IsPosInt],
+function(n)
+    return DIGRAPHS_Random_Edge_Weighted_Digraph(n);
 end);
 
 InstallMethod(RandomUniqueEdgeWeightedDigraph, "for a pos int and a float", [IsPosInt, IsFloat],
 function(n, p)
-    local digraph, weights;
-
-    digraph := RandomDigraphCons(IsImmutableDigraph, n, p);
-    weights := DIGRAPHS_Generate_Unique_Weights(digraph);
-
-    return EdgeWeightedDigraph(digraph, weights);
+    return DIGRAPHS_Random_Edge_Weighted_Digraph(n, p);
 end);
 
 InstallMethod(RandomUniqueEdgeWeightedDigraph, "for a pos int and a rational", [IsPosInt, IsRat],
 function(n, p)
-    local digraph, weights;
-
-    digraph := RandomDigraphCons(IsImmutableDigraph, n, p);
-    weights := DIGRAPHS_Generate_Unique_Weights(digraph);
-
-    return EdgeWeightedDigraph(digraph, weights);
+    return DIGRAPHS_Random_Edge_Weighted_Digraph(n, p);
 end);
 
 InstallMethod(RandomUniqueEdgeWeightedDigraph, "for a func, a pos int, and a float", [IsFunction, IsPosInt, IsFloat],
 function(filt, n, p)
-    local digraph, weights;
-
-    digraph := RandomDigraphCons(filt, n, p);
-    weights := DIGRAPHS_Generate_Unique_Weights(digraph);
-
-    return EdgeWeightedDigraph(digraph, weights);
+    return DIGRAPHS_Random_Edge_Weighted_Digraph(filt, n, p);
 end);
 
 InstallMethod(RandomUniqueEdgeWeightedDigraph, "for a func, a pos int, and a rational", [IsFunction, IsPosInt, IsRat],
 function(filt, n, p)
-    local digraph, weights;
-
-    digraph := RandomDigraphCons(filt, n, p);
-    weights := DIGRAPHS_Generate_Unique_Weights(digraph);
-
-    return EdgeWeightedDigraph(digraph, weights);
+    return DIGRAPHS_Random_Edge_Weighted_Digraph(filt, n, p);
 end);
 
 #############################################################################
@@ -980,19 +983,15 @@ DIGRAPHS_Get_Least_Weight_Edge := function(digraph, u, v)
     return smallestEdgeIdx;
 end;
 
-InstallMethod(DotColoredSubdigraphDigraph, "for a digraph, a digraph, and a record",
+InstallMethod(DotEdgeWeightedDigraph, "for a digraph, a digraph, and a record",
 [IsDigraph, IsDigraph, IsRecord],
 function(digraph, subdigraph, options)
     local digraphVertices, outsOriginal, outNeighboursOriginal, nrVertices, outsSubdigraph, 
     outNeighbours, outNeighboursSubdigraph, edgeColours, 
-    vertColours, u, v, idxOfSmallestEdge, opts, highlightColour, edgeColour, sourceColour, destColour, vertColour;
+    vertColours, u, v, idxOfSmallestEdge, opts, mainColour, edgeColour, sourceColour, destColour, vertColour,
+    vert_func, edge_func, weights, default, name;
 
-    highlightColour := "blue";
-    edgeColour := "black";
-    vertColour := "lightpink";
-    sourceColour := "green";
-    destColour := "red";
-    
+    default := rec(highlightColour := "blue", edgeColour := "black", vertColour := "lightpink", sourceColour := "green", destColour := "red");
 
     if IsRecord(options) then
         opts := ShallowCopy(options);
@@ -1000,26 +999,11 @@ function(digraph, subdigraph, options)
         opts := rec();
     fi;
 
-    # optional argument defaults   
-    if not IsBound(opts.sourceColour) then
-        opts.sourceColour := sourceColour;
-    fi;
-
-    if not IsBound(opts.destColour) then
-        opts.destColour := destColour;
-    fi;
-
-    if not IsBound(opts.vertColour) then
-        opts.vertColour := vertColour;
-    fi;
-
-    if not IsBound(opts.highlightColour) then
-        opts.highlightColour := highlightColour;
-    fi;
-
-    if not IsBound(opts.edgeColour) then
-        opts.edgeColour := edgeColour;
-    fi;
+    for name in RecNames(default) do
+        if IsBound(opts.(name)) then
+            default.(name) := opts.(name);
+        fi;
+    od;
 
     digraphVertices := DigraphVertices(subdigraph);
     nrVertices := Size(digraphVertices);
@@ -1030,27 +1014,27 @@ function(digraph, subdigraph, options)
     vertColours := EmptyPlist(nrVertices);
 
     for u in digraphVertices do
-        vertColours[u] := opts.vertColour;
+        vertColours[u] := default.vertColour;
         edgeColours[u] := [];
         outNeighboursSubdigraph := outsSubdigraph[u];
         outNeighboursOriginal := outsOriginal[u];
 
         # make everything black
         for v in outNeighboursOriginal do
-            Add(edgeColours[u], opts.edgeColour);
+            Add(edgeColours[u], default.edgeColour);
         od;
 
         # paint mst edges
         for v in outNeighboursSubdigraph do
             idxOfSmallestEdge := DIGRAPHS_Get_Least_Weight_Edge(digraph, u, v);
-            edgeColours[u][idxOfSmallestEdge] := opts.highlightColour;
+            edgeColours[u][idxOfSmallestEdge] := default.highlightColour;
         od;
     od;
 
     # set source and dest colours
     if IsBound(opts.source) then
         if 1 <= opts.source and opts.source <= nrVertices then
-            vertColours[opts.source] := opts.sourceColour;
+            vertColours[opts.source] := default.sourceColour;
         else
             ErrorNoReturn("source vertex does not exist,");
         fi;
@@ -1058,11 +1042,13 @@ function(digraph, subdigraph, options)
 
     if IsBound(opts.dest) then
         if 1 <= opts.dest and opts.dest <= nrVertices then
-            vertColours[opts.dest] := opts.destColour;
+            vertColours[opts.dest] := default.destColour;
         else
             ErrorNoReturn("destination vertex does not exist,"); 
         fi;
     fi;
 
-    return DotColoredDigraph(digraph, vertColours, edgeColours);
+    weights := EdgeWeights(digraph);
+
+   return DotColoredEdgeWeightedDigraph(digraph, vertColours, edgeColours, weights);
 end);
