@@ -411,6 +411,14 @@ gap> String(D);
 "DigraphFromDigraph6String(\"&CECG\")"
 gap> String(CycleDigraph(4));
 "CycleDigraph(4)"
+gap> d := EdgeWeightedDigraph([[1]],[[5]]);
+<immutable digraph with 1 vertex, 1 edge>
+gap> DigraphEdgeWeightedMinimumSpanningTree(d);
+rec( mst := <immutable empty digraph with 1 vertex>, total := 0 )
+gap> d := EdgeWeightedDigraph([[2],[1,2]],[[5],[5,5]]);
+<immutable digraph with 2 vertices, 3 edges>
+gap> DigraphEdgeWeightedShortestPaths(d, 1);           
+rec( distances := [ 0, 5 ], edges := [ fail, 1 ], parents := [ fail, 1 ] )
 
 #  DIGRAPHS_UnbindVariables
 gap> Unbind(gr2);

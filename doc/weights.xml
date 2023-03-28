@@ -83,6 +83,9 @@ gap> g := EdgeWeightedDigraph([[2, 3], [1], [2, 3]], [[5,10],[15],[20,25]]);
         The second component <C>mst</C> is the edge weighted digraph representation of the mst.
         <P/>
 
+        This algorithm only works on connected undirected graphs. If it is given a disconnected digraph, it will error. 
+        The function will internally convert <A>digraph</A> representation to an undirected representation.
+
         See <Ref Attr="EdgeWeights" Func="EdgeWeightedDigraph"/>.
     <Example><![CDATA[
 gap> g := EdgeWeightedDigraph([[2],[1],[1,2]], [[12],[5],[6,9]]);

@@ -158,6 +158,11 @@ function(digraph)
     outNeigbours, idx, v, w, mst, mstWeights, i, e, 
     parent, rank, total, node, x, y;
 
+    # check graph is connected
+    if not IsConnectedDigraph(digraph) then
+        ErrorNoReturn("digraph must be connected,");
+    fi;
+
     weights := EdgeWeights(digraph);
 
     # create a list of edges containining u-v
@@ -404,6 +409,18 @@ end;
 InstallMethod(DigraphEdgeWeightedShortestPaths, "for an edge weighted digraph",
 [IsDigraph and HasEdgeWeights, IsPosInt],
 function(digraph, source)
+    local nrVertices;
+    # must be strongly connected
+    if not IsStronglyConnectedDigraph(digraph) then
+        ErrorNoReturn("digraph must be strongly connected,");
+    fi;
+
+    # sources must exist in graph
+    nrVertices := DigraphNrVertices(digraph);
+    if source < 1 or source > nrVertices then
+        ErrorNoReturn("source vertex does not exist within digraph");
+    fi;
+
     if IsNegativeEdgeWeightedDigraph(digraph) then
         return DIGRAPHS_Edge_Weighted_Bellman_Ford(digraph, source);
     else 
