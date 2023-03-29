@@ -121,3 +121,11 @@ function(digraph)
     od;
     return false;
 end);
+
+#############################################################################
+# 2. Copies of edge weights
+#############################################################################
+
+InstallMethod(EdgeWeightsMutableCopy, "for a digraph by edge weights",
+[IsDigraph and HasEdgeWeights],
+D -> List(EdgeWeights(D), ShallowCopy));
