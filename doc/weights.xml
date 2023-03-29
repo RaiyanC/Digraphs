@@ -63,9 +63,9 @@ type 'quit;' to quit to outer loop
         
         See <Ref Attr="EdgeWeights"/>.
     <Example><![CDATA[
-gap> g := EdgeWeightedDigraph(Digraph([[2, 3], [1], [2, 3]]), [[5,10],[15],[20,25]]);        
+gap> g := EdgeWeightedDigraph(Digraph([[2], [1], [2]]), [[5,10],[15],[20]]);        
 <immutable digraph with 3 vertices, 5 edges>
-gap> g := EdgeWeightedDigraph([[2, 3], [1], [2, 3]], [[5,10],[15],[20,25]]);
+gap> g := EdgeWeightedDigraph([[2], [1], [2]], [[5],[15],[20]]);
 <immutable digraph with 3 vertices, 5 edges>
     ]]>
     </Example>
