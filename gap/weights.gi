@@ -50,10 +50,6 @@ function(digraph, weights)
             v := outNeighbours[idx];
             w := Float(outNeighbourWeights[idx]);
 
-            if not (IsInt(v) or IsFloat(v) or IsRat(v)) then
-                ErrorNoReturn("out neighbour must be either integer, float or rational,");
-            fi;
-
             if not (IsInt(w) or IsFloat(w) or IsRat(w)) then
                 ErrorNoReturn("out neighbour weight must be either integer, float or rational,");
             fi;

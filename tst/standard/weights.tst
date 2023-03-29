@@ -18,6 +18,15 @@ gap> DIGRAPHS_StartTest();
 gap> d := EdgeWeightedDigraph([[2],[]],[["a"],[]]); 
 Error, out neighbour weight must be either integer, float or rational,
 
+# check all elements of out neighbours are list
+gap> d := EdgeWeightedDigraph(["a",[]], [[5],[]]);              
+Error, the argument <list> must be a list of lists of positive integers not ex\
+ceeding the length of the argument,
+
+# check all elements of weights are list
+gap> d := EdgeWeightedDigraph([[1],[]], [5,[]]);  
+Error, 2nd argument (list) must be a list of lists,
+
 # string for digraphs
 gap> d := EdgeWeightedDigraph([["a"],[]],[[2],[]]); 
 Error, the argument <list> must be a list of lists of positive integers not ex\
@@ -67,6 +76,7 @@ gap> d := EdgeWeightedDigraph([[2],[1]], [[5],[10]]);
 <immutable digraph with 2 vertices, 2 edges>
 gap> IsStronglyConnectedDigraph(d);
 true
+
 #
 gap> DIGRAPHS_StopTest();
 gap> STOP_TEST("Digraphs package: standard/weights.tst", 0);
