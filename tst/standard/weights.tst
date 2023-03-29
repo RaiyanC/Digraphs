@@ -15,6 +15,10 @@ gap> LoadPackage("digraphs", false);;
 
 #
 gap> DIGRAPHS_StartTest();
+gap> d := EdgeWeightedDigraph(Digraph([[2],[]]), [[5],[]]);
+<immutable digraph with 2 vertices, 1 edge>
+
+# weight not valid
 gap> d := EdgeWeightedDigraph([[2],[]],[["a"],[]]); 
 Error, out neighbour weight must be either integer, float or rational,
 
