@@ -28,9 +28,13 @@
     <#Include Label="EdgeWeights">
     <#Include Label="EdgeWeightedDigraph">
     <#Include Label="DigraphEdgeWeightedMinimumSpanningTree">
-    <#Include Label="DigraphEdgeWeightedShortestPathsFromVertex">
     <#Include Label="DigraphEdgeWeightedShortestPaths">
+    <#Include Label="DigraphEdgeWeightedShortestDistances">
     <#Include Label="DigraphMaximumFlow">  
+    <#Include Label="RandomUniqueEdgeWeightedDigraph">
+    <#Include Label="DigraphFromPaths">
+    <#Include Label="DigraphFromPath">
+    <#Include Label="DotEdgeWeightedDigraph">
   </Section>
 
   <Section><Heading>Orders</Heading>

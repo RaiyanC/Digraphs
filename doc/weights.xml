@@ -100,7 +100,7 @@ rec( mst := <immutable digraph with 3 vertices, 2 edges>, total := 11 )
 
 <#GAPDoc Label="DigraphEdgeWeightedShortestPathsFromVertex">
     <ManSection>
-    <Oper Name="DigraphEdgeWeightedShortestPathsFromVertex" Arg="digraph, start"/>
+    <Oper Name="DigraphEdgeWeightedShortestPaths" Arg="digraph, start"/>
     <Returns>A record.</Returns>
     <Description>
         This operation, given a edge weighted <A>digraph</A> and a <A>start</A> vertex will return a record
@@ -178,6 +178,59 @@ gap> DigraphEdgeWeightedShortestPaths(g);
         The third and last component is the maximum flow value which is the highest flow that we can obtain from start to destination. <P/>
 
         See <Ref Attr="EdgeWeights" Func="EdgeWeightedDigraph"/>.
+    <Example><![CDATA[
+
+    ]]>
+    </Example>
+    </Description>
+    </ManSection>
+<#/GAPDoc>
+
+<#GAPDoc Label="RandomUniqueEdgeWeightedDigraph">
+    <ManSection>
+    <Attr Name="RandomUniqueEdgeWeightedDigraph" Arg="[filt, ]n[,p]"/>
+    <Returns>An edge weighted digraph.</Returns>
+    <Description>
+        &STANDARD_FILT_TEXT;
+        
+        As well as the filters implemented in <Ref Oper="RandomDigraph"/>, the following filters are implemented:
+        <Ref Filt="IsStronglyConnectedDigraph"/>.
+
+        For <Ref Filt="IsStronglyConnectedDigraph"/>, first a random connected tree is created which it self may have numerous
+        strongly connected components (scc) which are then them selves connected. For each sequential pair of strongly connected component
+        , a random u from the first scc and v from the second scc and given a directed edge from u to v. This is then repeated with an edge from a random vertex
+        in the second scc to the first scc.
+
+        If <A>n</A> is a positive integer, then this function returns a random edge weighted
+        digraph with <A>n</A> vertices, without multiple edges but with unique edge weights. The result
+        may or may not have loops. If using <Ref Filt='IsAcyclicDigraph'/>, the resulting graph 
+        will not have any loops by definition.<P/>
+
+        If the optional second argument <A>p</A> is a float with value
+        <M>0 \leq </M> <A> p </A> <M> \leq 1</M>, then an edge will exist between each
+        pair of vertices with probability approximately <A>p</A>.
+        If <A>p</A> is not specified, then a random probability will be assumed
+        (chosen with uniform probability).<P/>
+
+        See <Ref Attr="StronglyConnectedComponents"/>.
+    <Example><![CDATA[
+
+    ]]>
+    </Example>
+    </Description>
+    </ManSection>
+<#/GAPDoc>
+
+<#GAPDoc Label="DigraphFromPaths">
+    <ManSection>
+    <Attr Name="DigraphFromPaths" Arg="digraph, record"/>
+    <Returns>An edge weighted digraph.</Returns>
+    <Description>
+        Given an <A>digraph</A> and a <A>record<A/> of distances, edges and parents
+        this will compute the start vertex and will build a digraph of the shortest path from the start vertex
+        to all other vertices.
+ 
+        
     <Example><![CDATA[
 
     ]]>
