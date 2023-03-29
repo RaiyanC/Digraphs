@@ -77,6 +77,11 @@ gap> d := EdgeWeightedDigraph([[2],[1]], [[5],[10]]);
 gap> IsStronglyConnectedDigraph(d);
 true
 
+gap> d := RandomDigraph(IsStronglyConnectedDigraph, 10, 1.0);
+<immutable digraph with 10 vertices, 100 edges>
+gap> IsStronglyConnectedDigraph(d);
+true
+
 #
 gap> DIGRAPHS_StopTest();
 gap> STOP_TEST("Digraphs package: standard/weights.tst", 0);
