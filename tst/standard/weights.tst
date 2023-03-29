@@ -40,6 +40,44 @@ Error, size of out neighbours and weights for vertex 1 must be equal,
 gap> d := EdgeWeightedDigraph([[2],[]],[[5,10],[]]);
 Error, size of out neighbours and weights for vertex 1 must be equal,
 
+# changing edge weights mutable copy
+gap> d := EdgeWeightedDigraph([[2],[1]], [[5],[10]]);
+<immutable digraph with 2 vertices, 2 edges>
+gap> m := EdgeWeightsMutableCopy(d);
+[ [ 5 ], [ 10 ] ]
+gap> m[1] := [25];
+[ 25 ]
+
+# negative edge weights
+gap> d := EdgeWeightedDigraph([[2],[1]], [[5],[10]]);
+<immutable digraph with 2 vertices, 2 edges>
+gap> IsNegativeEdgeWeightedDigraph(d);
+false
+gap> d := EdgeWeightedDigraph([[2],[1]], [[-5],[10]]);
+<immutable digraph with 2 vertices, 2 edges>
+gap> IsNegativeEdgeWeightedDigraph(d);
+true
+
+# is strongly connected check working
+gap> d := EdgeWeightedDigraph([[2],[]], [[5],[]]);
+<immutable digraph with 2 vertices, 1 edge>
+gap> IsStronglyConnectedDigraph(d); 
+false
+gap> d := EdgeWeightedDigraph([[2],[1]], [[5],[10]]);
+<immutable digraph with 2 vertices, 2 edges>
+gap> IsStronglyConnectedDigraph(d);
+true
+
+# is strongly connected as filter
+gap> d := RandomDigraph(IsStronglyConnectedDigraph, 100, 0.001);
+<immutable digraph with 100 vertices, 260 edges>
+gap> IsStronglyConnectedDigraph(d);
+true
+gap> d := RandomDigraph(100, 0.001);                            
+<immutable digraph with 100 vertices, 10 edges>
+gap> IsStronglyConnectedDigraph(d);
+false
+
 #
 gap> DIGRAPHS_StopTest();
 gap> STOP_TEST("Digraphs package: standard/weights.tst", 0);
