@@ -25,7 +25,7 @@
     lists, whereas the function <C>EdgeWeightsMutableCopy</C> returns a copy
     of <C>EdgeWeights</C> which is a mutable list of mutable lists. <P/>
     <Example><![CDATA[
-gap> gr := EdgeWeightedDigraph([[2],[3],[1]], [[5],[10],[15]]);                                 
+gap> gr := EdgeWeightedDigraph([[2],[3],[1]], [[5],[10],[15]]);
 <immutable digraph with 3 vertices, 3 edges>
 gap> EdgeWeights(gr);
 [ [ 5 ], [ 10 ], [ 15 ] ]
@@ -39,10 +39,7 @@ gap> b := EdgeWeights(gr);
 [ [ 5 ], [ 10 ], [ 15 ] ]
 gap> b[1][1] := 534;
 Error, List Assignment: <list> must be a mutable list
-not in any function at *stdin*:39
-type 'quit;' to quit to outer loop    
-    ]]>
-    </Example>
+]]></Example>
     </Description>
     </ManSection>
 <#/GAPDoc>
@@ -63,12 +60,11 @@ type 'quit;' to quit to outer loop
         
         See <Ref Attr="EdgeWeights"/>.
     <Example><![CDATA[
-gap> g := EdgeWeightedDigraph(Digraph([[2], [1], [2]]), [[5,10],[15],[20]]);        
-<immutable digraph with 3 vertices, 5 edges>
-gap> g := EdgeWeightedDigraph([[2], [1], [2]], [[5],[15],[20]]);
-<immutable digraph with 3 vertices, 5 edges>
-    ]]>
-    </Example>
+gap> g := EdgeWeightedDigraph(Digraph([[2], [1]]), [[5],[15]]);
+<immutable digraph with 2 vertices, 2 edges>
+gap> g := EdgeWeightedDigraph([[2], [1]], [[5],[15]]);
+<immutable digraph with 2 vertices, 2 edges>
+]]></Example>
     </Description>
     </ManSection>
 <#/GAPDoc>
