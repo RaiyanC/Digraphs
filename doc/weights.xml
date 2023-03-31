@@ -87,7 +87,7 @@ gap> g := EdgeWeightedDigraph([[2], [1]], [[5], [15]]);
     <Example><![CDATA[
 gap> g := EdgeWeightedDigraph([[2],[1],[1,2]], [[12],[5],[6,9]]);
 <immutable digraph with 3 vertices, 4 edges>
-gap> DigraphEdgeWeightedMinimumSpanningTree(g); 
+gap> DigraphEdgeWeightedMinimumSpanningTree(g);
 rec( mst := <immutable digraph with 3 vertices, 2 edges>, total := 11 )
     ]]>
     </Example>
@@ -95,7 +95,7 @@ rec( mst := <immutable digraph with 3 vertices, 2 edges>, total := 11 )
     </ManSection>
 <#/GAPDoc>
 
-<#GAPDoc Label="DigraphEdgeWeightedShortestPathsFromVertex">
+<#GAPDoc Label="DigraphEdgeWeightedShortestPaths">
     <ManSection>
     <Oper Name="DigraphEdgeWeightedShortestPaths" Arg="digraph, start"/>
     <Returns>A record.</Returns>
@@ -138,7 +138,7 @@ type 'quit;' to quit to outer loop
     </ManSection>
 <#/GAPDoc>
 
-<#GAPDoc Label="DigraphEdgeWeightedShortestPaths">
+<#GAPDoc Label="DigraphEdgeWeightedShortestDistances">
     <ManSection>
     <Attr Name="DigraphEdgeWeightedShortestPaths" Arg="digraph"/>
     <Returns>A list of lists of integers, floats or rationals.</Returns>
@@ -189,7 +189,7 @@ gap> DigraphEdgeWeightedShortestPaths(g);
     <Returns>An edge weighted digraph.</Returns>
     <Description>
         &STANDARD_FILT_TEXT;
-        
+
         As well as the filters implemented in <Ref Oper="RandomDigraph"/>, the following filters are implemented:
         <Ref Filt="IsStronglyConnectedDigraph"/>.
 
@@ -223,11 +223,43 @@ gap> DigraphEdgeWeightedShortestPaths(g);
     <Attr Name="DigraphFromPaths" Arg="digraph, record"/>
     <Returns>An edge weighted digraph.</Returns>
     <Description>
-        Given an <A>digraph</A> and a <A>record<A/> of distances, edges and parents
+        Given an <A>digraph</A> and a <A>record</A> of distances, edges and parents
         this will compute the start vertex and will build a digraph of the shortest path from the start vertex
         to all other vertices.
- 
-        
+
+    <Example><![CDATA[
+
+    ]]>
+    </Example>
+    </Description>
+    </ManSection>
+<#/GAPDoc>
+
+
+<#GAPDoc Label="DigraphFromPath">
+    <ManSection>
+    <Attr Name="DigraphFromPath" Arg="digraph, record, dest"/>
+    <Returns>An edge weighted digraph.</Returns>
+    <Description>
+        Given an <A>digraph</A> and a <A>record</A> of distances, edges and parents
+        this will compute the start vertex and will build a digraph of the shortest path from the start vertex
+        to <A>dest</A> vertex.
+
+    <Example><![CDATA[
+
+    ]]>
+    </Example>
+    </Description>
+    </ManSection>
+<#/GAPDoc>
+
+<#GAPDoc Label="DotEdgeWeightedDigraph">
+    <ManSection>
+    <Attr Name="DotEdgeWeightedDigraph" Arg="digraph, subdigraph, record"/>
+    <Returns>A string.</Returns>
+    <Description>
+        Blank description.
+
     <Example><![CDATA[
 
     ]]>
