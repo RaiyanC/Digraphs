@@ -14,7 +14,8 @@
 
 InstallGlobalFunction(EdgeWeightedDigraph,
 function(digraph, weights)
-    local digraphVertices, nrVertices, u, outNeighbours, outNeighbourWeights, idx, v, w;
+    local digraphVertices, nrVertices, u, outNeighbours,
+    outNeighbourWeights, idx, w;
 
     if IsDigraph(digraph) then
         digraph := DigraphCopy(digraph);
@@ -26,8 +27,9 @@ function(digraph, weights)
     if not ForAll(weights, IsListOrCollection) then
         ErrorNoReturn("2nd argument (list) must be a list of lists,");
     fi;
-    
+
     digraphVertices := DigraphVertices(digraph);
+
     nrVertices := Size(digraphVertices);
 
     # check number there is an edge weight list for vertex u
@@ -38,20 +40,26 @@ function(digraph, weights)
     # check all elements of weights is a list and size/shape is correct
     for u in digraphVertices do
         outNeighbours := OutNeighbors(digraph)[u];
+
         outNeighbourWeights := weights[u];
 
-        # check number of out neigbours for u and number of weights given is the same
+        # check number of out neigbours for u
+        # and number of weights given is the same
         if Size(outNeighbours) <> Size(outNeighbourWeights) then
-            ErrorNoReturn("size of out neighbours and weights for vertex ", u," must be equal,");
+            ErrorNoReturn(
+                "size of out neighbours and weights for vertex ",
+                u,
+                " must be equal,");
         fi;
 
         # check all elements of out neighbours are int
-        for idx in [1..Size(outNeighbours)] do
+        for idx in [1 .. Size(outNeighbours)] do
             v := outNeighbours[idx];
             w := Float(outNeighbourWeights[idx]);
 
             if not (IsInt(w) or IsFloat(w) or IsRat(w)) then
-                ErrorNoReturn("out neighbour weight must be either integer, float or rational,");
+                ErrorNoReturn("out neighbour weight must be either
+                integer, float or rational,");
             fi;
         od;
     od;
@@ -69,7 +77,6 @@ function(digraph)
 
     for u in weights do
         for w in u do
-
             if Float(w) < Float(0) then
                 return true;
             fi;

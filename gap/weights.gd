@@ -8,9 +8,8 @@
 #############################################################################
 ##
 
-
 # 1. Edge Weights
-DeclareAttribute("EdgeWeights", IsDigraph); 
+DeclareAttribute("EdgeWeights", IsDigraph);
 DeclareGlobalFunction("EdgeWeightedDigraph");
 DeclareProperty("IsNegativeEdgeWeightedDigraph", IsDigraph and HasEdgeWeights);
 
