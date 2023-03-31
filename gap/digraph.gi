@@ -1636,36 +1636,38 @@ function(filt, n, p)
     return DigraphNC(adjacencyList);
 end);
 
-InstallMethod(RandomDigraphCons, "for IsStronglyConnectedDigraph, a positive integer, and a float", 
+InstallMethod(RandomDigraphCons,
+"for IsStronglyConnectedDigraph, a positive integer, and a float",
 [IsStronglyConnectedDigraph, IsPosInt, IsFloat],
 function(filt, n, p)
-    local randomDigraph, adjMatrix, stronglyConnectedComponents,
-    scc_a, scc_b, i, j, random_u, random_v, adjList, u, v;
+  local d, adjMatrix, stronglyConnectedComponents,
+  scc_a, scc_b, i, random_u, random_v;
 
-    # strong connected digraph must be at least connected
-    randomDigraph := RandomDigraph(IsConnectedDigraph, n, p);
-    stronglyConnectedComponents := DigraphStronglyConnectedComponents(randomDigraph);
+  # strong connected digraph must be at least connected
+  d := RandomDigraph(IsConnectedDigraph, n, p);
 
-    adjMatrix := AdjacencyMatrixMutableCopy(randomDigraph);
+  stronglyConnectedComponents := DigraphStronglyConnectedComponents(d);
 
-    for i in [1..Size(stronglyConnectedComponents.comps) - 1] do
-        scc_a := stronglyConnectedComponents.comps[i];
-        scc_b := stronglyConnectedComponents.comps[i+1];
+  adjMatrix := AdjacencyMatrixMutableCopy(d);
 
-        # add a connection from u to v
-        random_u := Random(scc_a);
-        random_v := Random(scc_b);
+  for i in [1 .. Size(stronglyConnectedComponents.comps) - 1] do
+      scc_a := stronglyConnectedComponents.comps[i];
+      scc_b := stronglyConnectedComponents.comps[i + 1];
 
-        adjMatrix[random_u][random_v] := 1;
+      # add a connection from u to v
+      random_u := Random(scc_a);
+      random_v := Random(scc_b);
 
-        # get a different u and v and add edge in the reverse direction
-        random_u := Random(scc_b);
-        random_v := Random(scc_a);
+      adjMatrix[random_u][random_v] := 1;
 
-        adjMatrix[random_u][random_v] := 1;
-    od;
+      # get a different u and v and add edge in the reverse direction
+      random_u := Random(scc_b);
+      random_v := Random(scc_a);
 
-    return DigraphByAdjacencyMatrix(adjMatrix);
+      adjMatrix[random_u][random_v] := 1;
+  od;
+
+  return DigraphByAdjacencyMatrix(adjMatrix);
 end);
 
 InstallMethod(RandomDigraphCons,
