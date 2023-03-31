@@ -3,7 +3,7 @@
 ##
 #W  standard/weights.tst
 #Y  Copyright (C) 2023                                Raiyan Chowdhury
-##                                                         
+##
 ##
 ##  Licensing information can be found in the README file of this package.
 ##

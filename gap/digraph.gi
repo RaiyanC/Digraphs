@@ -1639,13 +1639,13 @@ end);
 InstallMethod(RandomDigraphCons, "for IsStronglyConnectedDigraph, a positive integer, and a float", 
 [IsStronglyConnectedDigraph, IsPosInt, IsFloat],
 function(filt, n, p)
-    local randomDigraph, adjMatrix, stronglyConnectedComponents, 
+    local randomDigraph, adjMatrix, stronglyConnectedComponents,
     scc_a, scc_b, i, j, random_u, random_v, adjList, u, v;
 
     # strong connected digraph must be at least connected
     randomDigraph := RandomDigraph(IsConnectedDigraph, n, p);
     stronglyConnectedComponents := DigraphStronglyConnectedComponents(randomDigraph);
-    
+
     adjMatrix := AdjacencyMatrixMutableCopy(randomDigraph);
 
     for i in [1..Size(stronglyConnectedComponents.comps) - 1] do
@@ -1663,7 +1663,7 @@ function(filt, n, p)
         random_v := Random(scc_a);
 
         adjMatrix[random_u][random_v] := 1;
-    od; 
+    od;
 
     return DigraphByAdjacencyMatrix(adjMatrix);
 end);

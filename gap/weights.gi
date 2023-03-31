@@ -47,8 +47,7 @@ function(digraph, weights)
         # and number of weights given is the same
         if Size(outNeighbours) <> Size(outNeighbourWeights) then
             ErrorNoReturn(
-                "size of out neighbours and weights for vertex ",
-                u,
+                "size of out neighbours and weights for vertex ", u,
                 " must be equal,");
         fi;
 
@@ -58,8 +57,7 @@ function(digraph, weights)
             w := Float(outNeighbourWeights[idx]);
 
             if not (IsInt(w) or IsFloat(w) or IsRat(w)) then
-                ErrorNoReturn("out neighbour weight must be either
-                integer, float or rational,");
+                ErrorNoReturn("out neighbour weight must be either integer, float or rational,");
             fi;
         od;
     od;
