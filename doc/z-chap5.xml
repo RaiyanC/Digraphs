@@ -30,7 +30,7 @@
     <#Include Label="DigraphEdgeWeightedMinimumSpanningTree">
     <#Include Label="DigraphEdgeWeightedShortestPaths">
     <#Include Label="DigraphEdgeWeightedShortestDistances">
-    <#Include Label="DigraphMaximumFlow">  
+    <#Include Label="DigraphMaximumFlow">
     <#Include Label="RandomUniqueEdgeWeightedDigraph">
     <#Include Label="DigraphFromPaths">
     <#Include Label="DigraphFromPath">

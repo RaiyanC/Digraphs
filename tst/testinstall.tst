@@ -411,8 +411,10 @@ gap> String(D);
 "DigraphFromDigraph6String(\"&CECG\")"
 gap> String(CycleDigraph(4));
 "CycleDigraph(4)"
-gap> d := EdgeWeightedDigraph([[1]],[[5]]);
-<immutable digraph with 1 vertex, 1 edge>
+gap> d := EdgeWeightedDigraph([[2], [1]], [[5], [10]]);
+<immutable digraph with 2 vertices, 2 edges>
+gap> EdgeWeights(d);
+[ [ 5 ], [ 10 ] ]
 gap> DigraphEdgeWeightedMinimumSpanningTree(d);
 rec( mst := <immutable empty digraph with 1 vertex>, total := 0 )
 gap> d := EdgeWeightedDigraph([[2],[1,2]],[[5],[5,5]]);

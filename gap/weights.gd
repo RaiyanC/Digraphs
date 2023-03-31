@@ -14,19 +14,19 @@ DeclareAttribute("EdgeWeights", IsDigraph);
 DeclareGlobalFunction("EdgeWeightedDigraph");
 DeclareProperty("IsNegativeEdgeWeightedDigraph", IsDigraph and HasEdgeWeights);
 
-# 2. Minimum Spanning Trees
+# 2. Edge Weight Copies
+DeclareOperation("EdgeWeightsMutableCopy", [IsDigraph and HasEdgeWeights]);
+
+# 3. Minimum Spanning Trees
 DeclareAttribute("DigraphEdgeWeightedMinimumSpanningTree", IsDigraph and HasEdgeWeights);
 
-# 3. Shortest Path
+# 4. Shortest Path
 DeclareOperation("DigraphEdgeWeightedShortestPaths", [IsDigraph and HasEdgeWeights, IsPosInt]);
 DeclareAttribute("DigraphEdgeWeightedShortestDistances", IsDigraph and HasEdgeWeights);
 
-# 4. Maximum Flow
+# 5. Maximum Flow
 DeclareOperation("DigraphMaximumFlow", [IsDigraph and HasEdgeWeights, IsPosInt, IsPosInt]);
 DeclareAttribute("DigraphMinimumCuts", IsDigraph and HasEdgeWeights);
-
-# 5. Edge Weight Copies
-DeclareOperation("EdgeWeightsMutableCopy", [IsDigraph and HasEdgeWeights]);
 
 # 6. Random Edge Weighted Digraph
 DeclareOperation("RandomUniqueEdgeWeightedDigraph",[IsPosInt]);
