@@ -1644,7 +1644,7 @@ function(filt, n, p)
   scc_a, scc_b, i, random_u, random_v;
 
   # strong connected digraph must be at least connected
-  d := RandomDigraph(IsConnectedDigraph, n, p);
+  d := RandomDigraph(n, p);
 
   stronglyConnectedComponents := DigraphStronglyConnectedComponents(d);
 
