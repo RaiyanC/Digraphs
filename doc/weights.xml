@@ -52,12 +52,13 @@ Error, List Assignment: <list> must be a mutable list
     <Func Name="EdgeWeightedDigraph" Arg="digraph, weights"/>
     <Returns>A digraph or <K>fail</K></Returns>
     <Description>
-        <A>digraph</A> may be a Digraph or a list of lists of integers, floats or rationals<P/>
+        <A>digraph</A> may be a Digraph or a list of lists of
+        integers, floats or rationals<P/>
 
-        <A>weights</A> must be a list of lists of integers, floats or rationals of an equal size and shape to <A>digraph</A>, otherwise it will fail.<P/>
+        <A>weights</A> must be a list of lists of integers, floats or rationals
+         of an equal size and shape to <A>digraph</A>, otherwise it will fail.<P/>
 
-
-        This will create a EdgeWeightedDigraph and set the EdgeWeights to <A>weights</A>.<P/>
+        This will create a digraph and set the EdgeWeights to <A>weights</A>.<P/>
 
         See <Ref Attr="EdgeWeights"/>.
     <Example><![CDATA[
@@ -65,6 +66,8 @@ gap> g := EdgeWeightedDigraph(Digraph([[2], [1]]), [[5], [15]]);
 <immutable digraph with 2 vertices, 2 edges>
 gap> g := EdgeWeightedDigraph([[2], [1]], [[5], [15]]);
 <immutable digraph with 2 vertices, 2 edges>
+gap> EdgeWeights(g);
+[ [ 5 ], [ 15 ] ]
 ]]></Example>
     </Description>
     </ManSection>
