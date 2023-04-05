@@ -52,8 +52,9 @@ Error, List Assignment: <list> must be a mutable list
     <Func Name="EdgeWeightedDigraph" Arg="digraph, weights"/>
     <Returns>A digraph or <K>fail</K></Returns>
     <Description>
-        <A>digraph</A> may be a Digraph or a list of lists of
-        integers, floats or rationals<P/>
+        <A>digraph</A> may be a Digraph or a list of lists of integers, floats or rationals<P/>
+
+        <A>weights</A> must be a list of lists of integers, floats or rationals of an equal size and shape to <A>digraph</A>, otherwise it will fail.<P/>
 
         <A>weights</A> must be a list of lists of integers, floats or rationals
          of an equal size and shape to <A>digraph</A>, otherwise it will fail.<P/>
