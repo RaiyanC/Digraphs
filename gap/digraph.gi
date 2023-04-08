@@ -1662,7 +1662,7 @@ function(filt, n, p)
   od;
 
   # connect end scc to first scc
-  scc_a := stronglyConnectedComponents.comps[Size(stronglyConnectedComponents.comps) - 1];
+  scc_a := stronglyConnectedComponents.comps[Size(stronglyConnectedComponents.comps)];
   scc_b := stronglyConnectedComponents.comps[1];
 
   # add a connection from u to v
