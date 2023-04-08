@@ -99,7 +99,8 @@ DIGRAPHS_Find := function(parent, i)
         return i;
     fi;
 
-    return DIGRAPHS_Find(parent, parent[i]);
+    parent[i] := DIGRAPHS_Find(parent, parent[i]);
+    return parent[i];
 end;
 
 DIGRAPHS_Union := function(parent, rank, x, y)
@@ -792,7 +793,7 @@ DIGRAPHS_Generate_Unique_Weights := function(digraph)
     return weights;
 end;
 
-DIGRAPHS_Random_Edge_Weighted_Digraph := function(n)
+DIGRAPHS_Random_Edge_Weighted_Digraph_N := function(n)
     local digraph, weights;
 
     digraph := RandomDigraphCons(IsImmutableDigraph, n);
@@ -801,7 +802,7 @@ DIGRAPHS_Random_Edge_Weighted_Digraph := function(n)
     return EdgeWeightedDigraph(digraph, weights);
 end;
 
-DIGRAPHS_Random_Edge_Weighted_Digraph := function(n, p)
+DIGRAPHS_Random_Edge_Weighted_Digraph_N_P := function(n, p)
     local digraph, weights;
 
     digraph := RandomDigraphCons(IsImmutableDigraph, n, p);
@@ -810,7 +811,7 @@ DIGRAPHS_Random_Edge_Weighted_Digraph := function(n, p)
     return EdgeWeightedDigraph(digraph, weights);
 end;
 
-DIGRAPHS_Random_Edge_Weighted_Digraph := function(filt, n, p)
+DIGRAPHS_Random_Edge_Weighted_Digraph_Filt_N_P := function(filt, n, p)
     local digraph, weights;
 
     digraph := RandomDigraphCons(filt, n, p);
@@ -822,27 +823,27 @@ end;
 
 InstallMethod(RandomUniqueEdgeWeightedDigraph, "for a pos int", [IsPosInt],
 function(n)
-    return DIGRAPHS_Random_Edge_Weighted_Digraph(n);
+    return DIGRAPHS_Random_Edge_Weighted_Digraph_N(n);
 end);
 
 InstallMethod(RandomUniqueEdgeWeightedDigraph, "for a pos int and a float", [IsPosInt, IsFloat],
 function(n, p)
-    return DIGRAPHS_Random_Edge_Weighted_Digraph(n, p);
+    return DIGRAPHS_Random_Edge_Weighted_Digraph_N_P(n, p);
 end);
 
 InstallMethod(RandomUniqueEdgeWeightedDigraph, "for a pos int and a rational", [IsPosInt, IsRat],
 function(n, p)
-    return DIGRAPHS_Random_Edge_Weighted_Digraph(n, p);
+    return DIGRAPHS_Random_Edge_Weighted_Digraph_N_P(n, p);
 end);
 
 InstallMethod(RandomUniqueEdgeWeightedDigraph, "for a func, a pos int, and a float", [IsFunction, IsPosInt, IsFloat],
 function(filt, n, p)
-    return DIGRAPHS_Random_Edge_Weighted_Digraph(filt, n, p);
+    return DIGRAPHS_Random_Edge_Weighted_Digraph_Filt_N_P(filt, n, p);
 end);
 
 InstallMethod(RandomUniqueEdgeWeightedDigraph, "for a func, a pos int, and a rational", [IsFunction, IsPosInt, IsRat],
 function(filt, n, p)
-    return DIGRAPHS_Random_Edge_Weighted_Digraph(filt, n, p);
+    return DIGRAPHS_Random_Edge_Weighted_Digraph_Filt_N_P(filt, n, p);
 end);
 
 #############################################################################
