@@ -820,7 +820,6 @@ DIGRAPHS_Random_Edge_Weighted_Digraph_Filt_N_P := function(filt, n, p)
     return EdgeWeightedDigraph(digraph, weights);
 end;
 
-
 InstallMethod(RandomUniqueEdgeWeightedDigraph, "for a pos int", [IsPosInt],
 function(n)
     return DIGRAPHS_Random_Edge_Weighted_Digraph_N(n);
