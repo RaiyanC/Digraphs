@@ -1643,7 +1643,12 @@ function(filt, n, p)
   local d, adjMatrix, stronglyConnectedComponents,
   scc_a, scc_b, i, random_u, random_v;
 
+<<<<<<< HEAD
   d := RandomDigraph(n, p);
+=======
+  # strong connected digraph must be at least connected
+  d := RandomDigraph(IsConnectedDigraph, n, p);
+>>>>>>> b1d75d9 (Went back to old scc digraph filt)
 
   stronglyConnectedComponents := DigraphStronglyConnectedComponents(d);
 
@@ -1658,17 +1663,13 @@ function(filt, n, p)
       random_v := Random(scc_b);
 
       adjMatrix[random_u][random_v] := 1;
+
+      # get a different u and v and add edge in the reverse direction
+      random_u := Random(scc_b);
+      random_v := Random(scc_a);
+
+      adjMatrix[random_u][random_v] := 1;
   od;
-
-  # connect end scc to first scc
-  scc_a := stronglyConnectedComponents.comps[Size(stronglyConnectedComponents.comps)];
-  scc_b := stronglyConnectedComponents.comps[1];
-
-  # add a connection from u to v
-  random_u := Random(scc_a);
-  random_v := Random(scc_b);
-
-  adjMatrix[random_u][random_v] := 1;
 
   return DigraphByAdjacencyMatrix(adjMatrix);
 end);
