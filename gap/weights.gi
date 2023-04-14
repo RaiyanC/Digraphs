@@ -380,9 +380,9 @@ InstallMethod(DigraphEdgeWeightedShortestPaths, "for an edge weighted digraph",
 function(digraph, source)
     local nrVertices;
     # must be strongly connected
-    if not IsStronglyConnectedDigraph(digraph) then
-        ErrorNoReturn("digraph must be strongly connected,");
-    fi;
+    # if not IsStronglyConnectedDigraph(digraph) then
+    #     ErrorNoReturn("digraph must be strongly connected,");
+    # fi;
 
     # sources must exist in graph
     nrVertices := DigraphNrVertices(digraph);
