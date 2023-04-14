@@ -1643,16 +1643,7 @@ function(filt, n, p)
   local d, adjMatrix, stronglyConnectedComponents,
   scc_a, scc_b, i, random_u, random_v;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   d := RandomDigraph(n, p);
-=======
-  # strong connected digraph must be at least connected
-  d := RandomDigraph(IsConnectedDigraph, n, p);
->>>>>>> b1d75d9 (Went back to old scc digraph filt)
-=======
-  d := RandomDigraph(n, p);
->>>>>>> bcd63c7 (Re-adding is strongly connected filter)
 
   stronglyConnectedComponents := DigraphStronglyConnectedComponents(d);
 
