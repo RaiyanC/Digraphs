@@ -301,7 +301,7 @@ end;
 
 DIGRAPHS_Edge_Weighted_Bellman_Ford := function(digraph, source)
     local edgeList, weights, digraphVertices, distances, u, 
-    outNeighbours, idx, v, w, _, path, vertex, edge, parents, edges, d, i;
+    outNeighbours, idx, v, w, _, path, vertex, edge, parents, edges, d, i, flag;
 
     weights := EdgeWeights(digraph);
 
@@ -330,6 +330,8 @@ DIGRAPHS_Edge_Weighted_Bellman_Ford := function(digraph, source)
     parents[source] := fail;
     edges[source] := fail;
 
+    flag := true;
+
     # relax all edges: update weight with smallest edges
     for _ in digraphVertices do
         for edge in edgeList do
@@ -348,8 +350,13 @@ DIGRAPHS_Edge_Weighted_Bellman_Ford := function(digraph, source)
                 
                 parents[v] := u;
                 edges[v] := idx;
+                flag := false;
             fi;
         od;
+
+        if flag then
+            break;
+        fi;
     od;
 
     # check for negative cycles
@@ -463,6 +470,13 @@ DIGRAPHS_Edge_Weighted_FloydWarshall := function(digraph)
                 fi;
             od;
         od;
+    od;
+
+    # detect negative cycles
+    for i in [1..nr_vertices] do
+        if distances[i][i] < 0 then
+            ErrorNoReturn("negative cycle exists,");
+        fi;
     od;
 
     # replace infinity with fails
