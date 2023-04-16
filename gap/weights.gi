@@ -473,7 +473,7 @@ DIGRAPHS_Edge_Weighted_FloydWarshall := function(digraph)
     od;
 
     # detect negative cycles
-    for i in [1..nr_vertices] do
+    for i in [1..nrVertices] do
         if distances[i][i] < 0 then
             ErrorNoReturn("negative cycle exists,");
         fi;
