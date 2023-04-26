@@ -728,8 +728,26 @@ function(digraph, source, sink)
 
         weights := EdgeWeights(digraph);
 
+        if IsEmptyDigraph(digraph) then
+            ErrorNoReturn("empty digraph has no paths,");
+        fi;
+
         digraphVertices := DigraphVertices(digraph);
         nrVertices := Size(digraphVertices);
+
+        if source < 1 or source > nrVertices then
+            ErrorNoReturn("invalid source,");
+        fi;
+
+        if sink < 1 or sink > nrVertices then
+            ErrorNoReturn("invalid sink,");
+        fi;
+
+        if source = sink then
+            return rec(parents:=[], maxFlow:=0, flows:=[]);
+        fi;
+
+        
 
         outs := OutNeighbors(digraph);
 
@@ -907,6 +925,11 @@ function(digraph, record)
 
     for idx in [1..Size(distances)] do
         d := record.distances[idx];
+
+        if d = fail then
+            continue;
+        fi;
+        
         # distance to start node is 0
         if Float(d) = Float(0) then
             start := idx;
