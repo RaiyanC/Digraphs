@@ -57,8 +57,7 @@ function(digraph, weights)
 
           if not (IsInt(w) or IsFloat(w) or IsRat(w)) then
               ErrorNoReturn(
-                  "out neighbour weight must be either
-                   integer, float or rational,");
+            "out neighbour weight must be either integer, float or rational,");
           fi;
       od;
   od;
