@@ -54,8 +54,6 @@ Error, List Assignment: <list> must be a mutable list
     <Description>
         <A>digraph</A> may be a Digraph or a list of lists of integers, floats or rationals<P/>
 
-        <A>weights</A> must be a list of lists of integers, floats or rationals of an equal size and shape to <C>OutNeighbours(digraph)</C>, otherwise it will fail.<P/>
-
         <A>weights</A> must be a list of lists of integers, floats or rationals
          of an equal size and shape to <C>OutNeighbours(digraph)</C>, otherwise it will fail.<P/>
 
