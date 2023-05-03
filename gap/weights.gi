@@ -15,7 +15,7 @@
 InstallGlobalFunction(EdgeWeightedDigraph,
 function(digraph, weights)
   local digraphVertices, nrVertices, u, outNeighbours,
-  outNeighbourWeights, idx, w;
+  outNeighbourWeights, idx;
 
   if IsDigraph(digraph) then
       digraph := DigraphCopy(digraph);
@@ -25,7 +25,7 @@ function(digraph, weights)
 
   # check all elements of weights is a list
   if not ForAll(weights, IsListOrCollection) then
-      ErrorNoReturn("2nd argument (list) must be a list of lists,");
+      ErrorNoReturn("the 2nd argument (list) must be a list of lists,");
   fi;
 
   digraphVertices := DigraphVertices(digraph);
@@ -34,7 +34,7 @@ function(digraph, weights)
 
   # check number there is an edge weight list for vertex u
   if nrVertices <> Size(weights) then
-      ErrorNoReturn("number of out neighbours and weights must be equal,");
+      ErrorNoReturn("the number of out neighbours and weights must be equal,");
   fi;
 
   # check all elements of weights is a list and size/shape is correct
@@ -47,17 +47,18 @@ function(digraph, weights)
       # and number of weights given is the same
       if Size(outNeighbours) <> Size(outNeighbourWeights) then
           ErrorNoReturn(
-              "size of out neighbours and weights for vertex ",
+              "the sizes of the out neighbours and weights for vertex ",
                u, " must be equal,");
       fi;
 
-      # check all elements of out neighbours are int
+      # check all elements of out neighbours are approriate
       for idx in [1 .. Size(outNeighbours)] do
-          w := Float(outNeighbourWeights[idx]);
 
-          if not (IsInt(w) or IsFloat(w) or IsRat(w)) then
+          if not (IsInt(outNeighbourWeights[idx]) 
+          or IsFloat(outNeighbourWeights[idx]) 
+          or IsRat(outNeighbourWeights[idx])) then
               ErrorNoReturn(
-            "out neighbour weight must be either integer, float or rational,");
+            "out neighbour weight must be an integer, float or rational,");
           fi;
       od;
   od;
@@ -66,7 +67,7 @@ function(digraph, weights)
   return digraph;
 end);
 
-InstallMethod(IsNegativeEdgeWeightedDigraph, "for IsNegativeEdgeWeightedDigraph",
+InstallMethod(IsNegativeEdgeWeightedDigraph, "for an edge weighted digraph",
 [IsDigraph and HasEdgeWeights],
 function(digraph)
   local weights, u, w;
@@ -87,6 +88,6 @@ end);
 # 2. Copies of edge weights
 #############################################################################
 
-InstallMethod(EdgeWeightsMutableCopy, "for a digraph by edge weights",
+InstallMethod(EdgeWeightsMutableCopy, "for a digraph with edge weights",
 [IsDigraph and HasEdgeWeights],
 D -> List(EdgeWeights(D), ShallowCopy));
