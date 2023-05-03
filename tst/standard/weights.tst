@@ -24,7 +24,7 @@ gap> d := EdgeWeightedDigraph(Digraph([[2], []]), [[5], []]);
 
 # weight not valid
 gap> d := EdgeWeightedDigraph([[2], []], [["a"], []]);
-Error, out neighbour weight must be either integer, float or rational,
+Error, out neighbour weight must be an integer, float or rational,
 
 # check all elements of out neighbours are list
 gap> d := EdgeWeightedDigraph(["a", []], [[5], []]);
@@ -33,7 +33,7 @@ ceeding the length of the argument,
 
 # check all elements of weights are list
 gap> d := EdgeWeightedDigraph([[1], []], [5, []]);
-Error, 2nd argument (list) must be a list of lists,
+Error, the 2nd argument (list) must be a list of lists,
 
 # string for digraphs
 gap> d := EdgeWeightedDigraph([["a"], []], [[2], []]);
@@ -47,15 +47,17 @@ ceeding the length of the argument,
 
 # incorrect digraph and weights
 gap> d := EdgeWeightedDigraph([[2], []], [[5]]);
-Error, number of out neighbours and weights must be equal,
+Error, the number of out neighbours and weights must be equal,
 
 # incorrect digraph and weights
 gap> d := EdgeWeightedDigraph([[2, 2], []], [[5], []]);
-Error, size of out neighbours and weights for vertex 1 must be equal,
+Error, the sizes of the out neighbours and weights for vertex 1 must\
+ be equal,
 
 # incorrect digraph and weights
 gap> d := EdgeWeightedDigraph([[2], []], [[5, 10], []]);
-Error, size of out neighbours and weights for vertex 1 must be equal,
+Error, the sizes of the out neighbours and weights for vertex 1 must\
+ be equal,
 
 # changing edge weights mutable copy
 gap> d := EdgeWeightedDigraph([[2], [1]], [[5], [10]]);
@@ -64,6 +66,16 @@ gap> m := EdgeWeightsMutableCopy(d);
 [ [ 5 ], [ 10 ] ]
 gap> m[1] := [25];
 [ 25 ]
+gap> m;
+[ [ 25 ], [ 10 ] ]
+gap> m[2][1] := 30;
+30
+gap> m;
+[ [ 25 ], [ 30 ] ]
+gap> m := EdgeWeights(d);
+[ [ 5 ], [ 10 ] ]
+gap> m[1] := [25];
+Error, List Assignment: <list> must be a mutable list
 
 # negative edge weights
 gap> d := EdgeWeightedDigraph([[2], [1]], [[5], [10]]);

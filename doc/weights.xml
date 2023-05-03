@@ -25,7 +25,7 @@
     of <C>EdgeWeights</C> which is a mutable list of mutable lists.<P/>
 
     The edge weights of a digraph cannot be computed and must be set either 
-    using <C>SetEdgeWeights<C/> or <Ref Func="EdgeWeightedDigraph" />.<P/>
+    using <C>SetEdgeWeights</C> or <Ref Func="EdgeWeightedDigraph" />.<P/>
     <Example><![CDATA[
 gap> gr := EdgeWeightedDigraph([[2], [3], [1]], [[5], [10], [15]]);
 <immutable digraph with 3 vertices, 3 edges>
