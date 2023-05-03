@@ -176,6 +176,37 @@ Error, no method found! For debugging hints type ?Recovery from NoMethodFound
 Error, no 1st choice method found for `DigraphEdgeWeightedShortestPaths' on 2 \
 arguments
 
+# no path exists
+gap> d := EdgeWeightedDigraph([[1],[2]],[[5],[10]]);
+<immutable digraph with 2 vertices, 2 edges>
+gap> DigraphEdgeWeightedShortestPaths(d, 1);
+rec( distances := [ 0, fail ], edges := [ fail, fail ], parents := [ fail, fail ] )
+
+# no path exists with negative edge weight
+gap> d := EdgeWeightedDigraph([[2],[2],[]],[[-5],[10],[]]);
+<immutable digraph with 2 vertices, 2 edges>
+gap> DigraphEdgeWeightedShortestPaths(d, 1);
+rec( distances := [ 0, -5, fail ], edges := [ fail, 1, fail ], parents := [ fail, 1, fail ] )
+
+# parallel edges
+gap> d := EdgeWeightedDigraph([[2,2,2],[]],[[3,2,1],[]]);
+<immutable multidigraph with 2 vertices, 3 edges>
+gap> DigraphEdgeWeightedShortestDistances(d);
+[ [ 0, 1 ], [ fail, 0 ] ]
+
+# negative cycle
+gap> d := EdgeWeightedDigraph([[2],[3],[1]],[[-3],[-5],[-7]]);
+<immutable digraph with 3 vertices, 3 edges>
+gap> DigraphEdgeWeightedShortestDistances(d);
+Error, negative cycle exists,
+
+# testing johnson
+gap> d := EdgeWeightedDigraph([[2],[3],[],[],[]],[[3],[5],[],[],[]]);
+<immutable digraph with 5 vertices, 2 edges>
+gap> DigraphEdgeWeightedShortestDistances(d);
+[ [ 0, 3, 8, fail, fail ], [ fail, 0, 5, fail, fail ], [ fail, fail, 0, fail, fail ], [ fail, fail, fail, 0, fail ],
+  [ fail, fail, fail, fail, 0 ] ]
+
 # empty digraphs
 gap> d := EdgeWeightedDigraph([],[]);
 <immutable empty digraph with 0 vertices>

@@ -169,7 +169,11 @@ gap> DigraphEdgeWeightedShortestDistances(g);
 
         See <Ref Attr="EdgeWeights" Func="EdgeWeightedDigraph"/>.
     <Example><![CDATA[
-
+gap> g := EdgeWeightedDigraph([[2,2],[3],[]],[[3,2],[1],[]]);
+<immutable multidigraph with 3 vertices, 3 edges>
+gap> DigraphMaximumFlow(g, 1, 3);
+rec( flows := [ [  ], [ 1, 0 ], [ 1 ] ], maxFlow := 1,
+  parents := [ [  ], [ 1, 1 ], [ 2 ] ] )
     ]]>
     </Example>
     </Description>
@@ -204,7 +208,10 @@ gap> DigraphEdgeWeightedShortestDistances(g);
 
         See <Ref Attr="StronglyConnectedComponents"/>.
     <Example><![CDATA[
-
+gap> g := RandomUniqueEdgeWeightedDigraph(IsStronglyConnectedDigraph, 5, 1);
+<immutable digraph with 5 vertices, 25 edges>
+gap> g := RandomUniqueEdgeWeightedDigraph(5, 1);                            
+<immutable digraph with 5 vertices, 25 edges>
     ]]>
     </Example>
     </Description>
@@ -216,12 +223,18 @@ gap> DigraphEdgeWeightedShortestDistances(g);
     <Attr Name="DigraphFromPaths" Arg="digraph, record"/>
     <Returns>An edge weighted digraph.</Returns>
     <Description>
-        Given an <A>digraph</A> and a <A>record</A> of distances, edges and parents
+        Given a <A>digraph</A> and a <A>record</A> of distances, edges and parents
         this will compute the start vertex and will build a digraph of the shortest path from the start vertex
         to all other vertices.
 
     <Example><![CDATA[
-
+gap> g := EdgeWeightedDigraph([[2],[3],[]],[[2],[1],[]]);
+<immutable digraph with 3 vertices, 2 edges>
+gap> sp := DigraphEdgeWeightedShortestPaths(g, 1);
+rec( distances := [ 0, 2, 3 ], edges := [ fail, 1, 1 ],
+  parents := [ fail, 1, 2 ] )
+gap> sd := DigraphFromPaths(g, sp);
+<immutable digraph with 3 vertices, 2 edges>
     ]]>
     </Example>
     </Description>
@@ -234,11 +247,20 @@ gap> DigraphEdgeWeightedShortestDistances(g);
     <Attr Name="DigraphFromPath" Arg="digraph, record, dest"/>
     <Returns>An edge weighted digraph.</Returns>
     <Description>
-        Given an <A>digraph</A> and a <A>record</A> of distances, edges and parents
+        Given a <A>digraph</A> and a <A>record</A> of distances, edges and parents
         this will compute the start vertex and will build a digraph of the shortest path from the start vertex
         to <A>dest</A> vertex.
 
     <Example><![CDATA[
+gap> g := EdgeWeightedDigraph([[2],[3],[]],[[2],[1],[]]);
+<immutable digraph with 3 vertices, 2 edges>
+gap> sp := DigraphEdgeWeightedShortestPaths(g, 1);
+rec( distances := [ 0, 2, 3 ], edges := [ fail, 1, 1 ],
+  parents := [ fail, 1, 2 ] )
+gap> sd := DigraphFromPath(g, sp, 3);
+<immutable digraph with 3 vertices, 2 edges>
+gap> sd := DigraphFromPath(g, sp, 2);
+<immutable digraph with 3 vertices, 1 edge>
 
     ]]>
     </Example>
@@ -251,11 +273,32 @@ gap> DigraphEdgeWeightedShortestDistances(g);
     <Attr Name="DotEdgeWeightedDigraph" Arg="digraph, subdigraph, record"/>
     <Returns>A string.</Returns>
     <Description>
-        Blank description.
+        Given an<A>digraph</A>, <A>subdigraph</A> and a <A>record</A> of a subdigraph within the original digraph,
+        using the record optional parameters, this will return a DOT of the subdigraph within the original digraph.<P/>
+
+        Optional parameters in the <A>record</A> include:
+        - highlightColour (default blue): the colour of the path of the subdigraph
+        - edgeColour (default black): the colour of the non subdigraph path
+        - vertColor (default lightpink): the colour of the vertices
+        - sourceColour (default green): the colour of a source vertex
+        - destColour (default red): the colour of a destination vertex
+
+        An empty record may be passed as a parameters, in which case the default values will be used.
 
     <Example><![CDATA[
+gap> g := EdgeWeightedDigraph([[2],[3],[]],[[2],[1],[]]);
+<immutable digraph with 3 vertices, 2 edges>
+gap> sp := DigraphEdgeWeightedShortestPaths(g, 1);
+rec( distances := [ 0, 2, 3 ], edges := [ fail, 1, 1 ],
+  parents := [ fail, 1, 2 ] )
+gap> sd := DigraphFromPath(g, sp, 3);
+<immutable digraph with 3 vertices, 2 edges>
+gap> DotEdgeWeightedDigraph(g, sd, rec());
+"//dot\ndigraph hgn{\nnode [shape=circle]\n1[color=lightpink, style=fi\
+lled]\n2[color=lightpink, style=filled]\n3[color=lightpink, style=fill\
+ed]\n1 -> 2[color=blue, label=2]\n2 -> 3[color=blue, label=1]\n}\n"
 
-    ]]>
+]]>
     </Example>
     </Description>
     </ManSection>

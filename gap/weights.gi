@@ -288,7 +288,7 @@ DIGRAPHS_Edge_Weighted_Dijkstra:= function(digraph, source)
     # fill lists with -1 if no path is possible
     for i in [1..Size(distances)] do
         d := distances[i];
-        if d = infinity then
+        if Float(d) = Float(infinity) then
             distances[i] := fail;
             parents[i] := fail;
             edges[i] := fail;
@@ -374,6 +374,7 @@ DIGRAPHS_Edge_Weighted_Bellman_Ford := function(digraph, source)
     for i in [1..Size(distances)] do
         d := distances[i];
         if Float(d) = Float(infinity) then
+            distances[i] := fail;
             parents[i] := fail;
             edges[i] := fail;
         fi; 
@@ -589,7 +590,7 @@ function(digraph)
 
     digraphVertices := DigraphVertices(digraph);
     nrVertices := Size(digraphVertices);
-    nrEdges := DigraphEdges(digraph);
+    nrEdges := DigraphNrEdges(digraph);
 
     maxNodes := nrVertices * (nrVertices - 1);
 
@@ -598,7 +599,6 @@ function(digraph)
     # graph we use johnson's algorithm which performs better on sparse graphs, otherwise
     # we use floyd warshall algorithm. This information is gathered from benchmarking tests.
     threshold := Int(maxNodes/8);
-
     if nrEdges <= threshold then
         return DIGRAPHS_Edge_Weighted_Johnson(digraph);
     else
@@ -648,10 +648,10 @@ function(digraph, source, sink)
         return flow - temp;
     end;
 
-    BFS := function(adjMatrix, flowMatrix, source, sink)
+    BFS := function(capacityMatrix, flowMatrix, source, sink)
         local nrVertices, queue,u, v, edgeIdx, e, f;
 
-        nrVertices := Size(adjMatrix);
+        nrVertices := Size(capacityMatrix);
         queue := PlistDeque();
         PlistDequePushFront(queue, source);
 
@@ -666,9 +666,9 @@ function(digraph, source, sink)
 
         while not IsEmpty(queue) do
             u := PlistDequePopFront(queue);
-            for v in Keys(adjMatrix[u]) do
-                for edgeIdx in [1..Size(adjMatrix[u][v])] do
-                    e := adjMatrix[u][v][edgeIdx];
+            for v in Keys(capacityMatrix[u]) do
+                for edgeIdx in [1..Size(capacityMatrix[u][v])] do
+                    e := capacityMatrix[u][v][edgeIdx];
                     f := flowMatrix[u][v][edgeIdx];
                     if Float(f) < Float(e) and levels[v] = 0 then
                         levels[v] := levels[u] + 1;
@@ -723,7 +723,7 @@ function(digraph, source, sink)
     end;
 
     Dinic := function(digraph, source, sink)
-        local weights, adjMatrix, digraphVertices, nrVertices,u,v,edges, outs, 
+        local weights, capacityMatrix, digraphVertices, nrVertices,u,v,edges, outs, 
         edgeIdx, idx, outNeighbours, w, i, j, k, flowInformation, parents, flowMatrix;
 
         weights := EdgeWeights(digraph);
@@ -751,16 +751,16 @@ function(digraph, source, sink)
 
         outs := OutNeighbors(digraph);
 
-        adjMatrix := HashMap();
+        capacityMatrix := HashMap();
         flowMatrix := HashMap();
         
         # fill adj and max flow with zeroes
         for u in digraphVertices do
-            adjMatrix[u] := HashMap();
+            capacityMatrix[u] := HashMap();
             flowMatrix[u] := HashMap();
 
             for v in digraphVertices do
-                adjMatrix[u][v] := [0];
+                capacityMatrix[u][v] := [0];
                 flowMatrix[u][v] := [0];
             od;
         od;
@@ -772,18 +772,18 @@ function(digraph, source, sink)
                 w := weights[u][idx]; # the weight to the out neighbour
 
                 # if edge already exists
-                if adjMatrix[u][v][1] <> 0 then
-                    Add(adjMatrix[u][v], w); 
+                if capacityMatrix[u][v][1] <> 0 then
+                    Add(capacityMatrix[u][v], w); 
                     Add(flowMatrix[u][v], 0); 
                     Add(flowMatrix[v][u], 0);
                 else 
-                    adjMatrix[u][v][1] := w;
+                    capacityMatrix[u][v][1] := w;
                 fi;
             od;
         od;
 
-        while BFS(adjMatrix, flowMatrix, source, sink) do
-            DFS(adjMatrix, flowMatrix, source, infinity);
+        while BFS(capacityMatrix, flowMatrix, source, sink) do
+            DFS(capacityMatrix, flowMatrix, source, infinity);
         od;
 
         flowInformation := GetFlowInformation(flowMatrix, source);
@@ -921,7 +921,6 @@ function(digraph, record)
     edges := record.edges;
     parents := record.parents;
     nrVertices := Size(distances);
-
 
     for idx in [1..Size(distances)] do
         d := record.distances[idx];
