@@ -943,14 +943,6 @@ function(digraph, record)
     parents    := record.parents;
     nrVertices := Size(distances);
 
-    for idx in [1 .. Size(distances)] do
-        d := record.distances[idx];
-
-        if d = fail then
-            continue;
-        fi;
-    od;
-
     outNeighbours := EmptyPlist(nrVertices);
 
     # fill out neighbours with empty lists
@@ -1012,8 +1004,6 @@ function(digraph, subdigraph, options)
 
     if IsRecord(options) then
         opts := ShallowCopy(options);
-    else
-        opts := rec();
     fi;
 
     for name in RecNames(default) do

@@ -121,6 +121,12 @@ gap> d := EdgeWeightedDigraph([[]],[[]]);
 gap> DigraphEdgeWeightedShortestPath(d, 1);
 rec( distances := [ 0 ], edges := [ fail ], parents := [ fail ] )
 
+# early break when path doesn't exist
+gap> d := EdgeWeightedDigraph([[], [1]], [[], [-10]]);;
+gap> DigraphEdgeWeightedShortestPath(d, 1);
+rec( distances := [ 0, fail ], edges := [ fail, fail ], 
+  parents := [ fail, fail ] )
+
 # graph with one node and self loop
 gap> d := EdgeWeightedDigraph([[1]],[[5]]);
 <immutable digraph with 1 vertex, 1 edge>
@@ -284,6 +290,56 @@ gap> d := EdgeWeightedDigraph([[2],[3],[1]],[[5],[10],[7]]);
 gap> DigraphMaximumFlow(d, 1, 3);
 rec( flows := [ [  ], [ 5 ], [ 5 ] ], maxFlow := 5, 
   parents := [ [  ], [ 1 ], [ 2 ] ] )
+
+# random edge weighted digraph creation
+gap> d := RandomUniqueEdgeWeightedDigraph(5);;
+gap> DigraphNrVertices(d);
+5
+gap> OutNeighbours(d);
+[ [ 1, 2, 3, 4, 5 ], [ 1, 2, 3, 4, 5 ], [ 1, 2, 3, 4, 5 ], [ 1, 2, 3, 4, 5 ], 
+  [ 1, 2, 3, 4, 5 ] ]
+
+# more random edge weighted digraph creation tests
+gap> d := RandomUniqueEdgeWeightedDigraph(5, 0.1);;
+gap> DigraphNrVertices(d);                         
+5
+
+# more random edge weighted digraph creation tests
+gap> d := RandomUniqueEdgeWeightedDigraph(IsStronglyConnectedDigraph, 5, 0.1);;
+gap> DigraphNrVertices(d);
+5
+
+# dot tests
+gap> d := EdgeWeightedDigraph([[2], [1]], [[5], [10]]);;
+gap> sp := DigraphEdgeWeightedShortestPath(d, 1);;
+gap> sd := DigraphFromPaths(d, sp);;
+gap> DotEdgeWeightedDigraph(d, sd, rec(sourceColour:="red"));;
+
+# dot tests
+gap> d := EdgeWeightedDigraph([[2], [1]], [[5], [10]]);;
+gap> sp := DigraphEdgeWeightedShortestPath(d, 1);;
+gap> sd := DigraphFromPaths(d, sp);;
+gap> DotEdgeWeightedDigraph(d, sd, rec(source:=1));;
+
+# dot tests
+gap> d := EdgeWeightedDigraph([[2], [1]], [[5], [10]]);;
+gap> sp := DigraphEdgeWeightedShortestPath(d, 1);;
+gap> sd := DigraphFromPaths(d, sp);;
+gap> DotEdgeWeightedDigraph(d, sd, rec(source:=500));
+Error, source vertex does not exist,
+
+# dot tests
+gap> d := EdgeWeightedDigraph([[2], [1]], [[5], [10]]);;
+gap> sp := DigraphEdgeWeightedShortestPath(d, 1);;
+gap> sd := DigraphFromPaths(d, sp);;
+gap> DotEdgeWeightedDigraph(d, sd, rec(dest:=2));;
+
+# dot tests
+gap> d := EdgeWeightedDigraph([[2], [1]], [[5], [10]]);;
+gap> sp := DigraphEdgeWeightedShortestPath(d, 1);;
+gap> sd := DigraphFromPaths(d, sp);;
+gap> DotEdgeWeightedDigraph(d, sd, rec(dest:=500));
+Error, destination vertex does not exist,
 
 #
 gap> DIGRAPHS_StopTest();
