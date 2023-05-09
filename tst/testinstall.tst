@@ -419,7 +419,7 @@ gap> DigraphEdgeWeightedMinimumSpanningTree(d);
 rec( mst := <immutable digraph with 2 vertices, 1 edge>, total := 5 )
 gap> d := EdgeWeightedDigraph([[2], [1, 2]], [[5], [5, 5]]);
 <immutable digraph with 2 vertices, 3 edges>
-gap> DigraphEdgeWeightedShortestPaths(d, 1);
+gap> DigraphEdgeWeightedShortestPath(d, 1);
 rec( distances := [ 0, 5 ], edges := [ fail, 1 ], parents := [ fail, 1 ] )
 
 #  DIGRAPHS_UnbindVariables

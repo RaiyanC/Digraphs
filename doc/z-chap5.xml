@@ -28,8 +28,8 @@
     <#Include Label="EdgeWeights">
     <#Include Label="EdgeWeightedDigraph">
     <#Include Label="DigraphEdgeWeightedMinimumSpanningTree">
+    <#Include Label="DigraphEdgeWeightedShortestPath">
     <#Include Label="DigraphEdgeWeightedShortestPaths">
-    <#Include Label="DigraphEdgeWeightedShortestDistances">
     <#Include Label="DigraphMaximumFlow">
     <#Include Label="RandomUniqueEdgeWeightedDigraph">
     <#Include Label="DigraphFromPaths">

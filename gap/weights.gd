@@ -21,8 +21,8 @@ DeclareOperation("EdgeWeightsMutableCopy", [IsDigraph and HasEdgeWeights]);
 DeclareAttribute("DigraphEdgeWeightedMinimumSpanningTree", IsDigraph and HasEdgeWeights);
 
 # 4. Shortest Path
-DeclareOperation("DigraphEdgeWeightedShortestPaths", [IsDigraph and HasEdgeWeights, IsPosInt]);
-DeclareAttribute("DigraphEdgeWeightedShortestDistances", IsDigraph and HasEdgeWeights);
+DeclareOperation("DigraphEdgeWeightedShortestPath", [IsDigraph and HasEdgeWeights, IsPosInt]);
+DeclareAttribute("DigraphEdgeWeightedShortestPaths", IsDigraph and HasEdgeWeights);
 
 # 5. Maximum Flow
 DeclareOperation("DigraphMaximumFlow", [IsDigraph and HasEdgeWeights, IsPosInt, IsPosInt]);
