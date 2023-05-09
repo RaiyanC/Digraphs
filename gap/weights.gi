@@ -561,7 +561,7 @@ DIGRAPHS_Edge_Weighted_Johnson := function(digraph)
     Remove(mutableWeights, 1);
 
     # update v to v - 1
-    for u in [1 . .Size(mutableOuts)] do
+    for u in [1 .. Size(mutableOuts)] do
         for v in [1 .. Size(mutableOuts[u])] do
             mutableOuts[u][v] := mutableOuts[u][v] - 1;
         od;

@@ -88,9 +88,8 @@ gap> g := EdgeWeightedDigraph([[2], [1]], [[5], [15]]);
 gap> g := EdgeWeightedDigraph([[2],[1],[1,2]], [[12],[5],[6,9]]);
 <immutable digraph with 3 vertices, 4 edges>
 gap> DigraphEdgeWeightedMinimumSpanningTree(g);
-rec( mst := <immutable digraph with 3 vertices, 2 edges>, total := 11
- )]]>
-    </Example>
+rec( mst := <immutable digraph with 3 vertices, 2 edges>, total := 11 
+ )]]></Example>
     </Description>
     </ManSection>
 <#/GAPDoc>
@@ -124,8 +123,7 @@ gap> ncg := EdgeWeightedDigraph([[2],[3],[1]],[[-1],[-2],[-3]]);
 <immutable digraph with 3 vertices, 3 edges>
 gap> DigraphEdgeWeightedShortestPath(ncg,1);
 Error, negative cycle exists,
-]]>
-    </Example>
+]]></Example>
     </Description>
     </ManSection>
 <#/GAPDoc>
@@ -145,10 +143,9 @@ Error, negative cycle exists,
 gap> g := EdgeWeightedDigraph([[2],[3],[1]],[[1],[2],[3]]);
 <immutable digraph with 3 vertices, 3 edges>
 gap> DigraphEdgeWeightedShortestPaths(g);
-rec( distances := [ [ 0, 1, 3 ], [ 5, 0, 2 ], [ 3, 4, 0 ] ],
-  edges := [ [ fail, 1, 1 ], [ 1, fail, 1 ], [ 1, 1, fail ] ],
-  parents := [ [ fail, 3, 1 ], [ 2, fail, 1 ], [ 2, 3, fail ] ] )]]>
-    </Example>
+rec( distances := [ [ 0, 1, 3 ], [ 5, 0, 2 ], [ 3, 4, 0 ] ], 
+  edges := [ [ fail, 1, 1 ], [ 1, fail, 1 ], [ 1, 1, fail ] ], 
+  parents := [ [ fail, 1, 1 ], [ 2, fail, 2 ], [ 3, 3, fail ] ] )]]></Example>
     </Description>
     </ManSection>
 <#/GAPDoc>
@@ -174,10 +171,8 @@ rec( distances := [ [ 0, 1, 3 ], [ 5, 0, 2 ], [ 3, 4, 0 ] ],
 gap> g := EdgeWeightedDigraph([[2,2],[3],[]],[[3,2],[1],[]]);
 <immutable multidigraph with 3 vertices, 3 edges>
 gap> DigraphMaximumFlow(g, 1, 3);
-rec( flows := [ [  ], [ 1, 0 ], [ 1 ] ], maxFlow := 1,
-  parents := [ [  ], [ 1, 1 ], [ 2 ] ] )
-    ]]>
-    </Example>
+rec( flows := [ [  ], [ 1, 0 ], [ 1 ] ], maxFlow := 1, 
+  parents := [ [  ], [ 1, 1 ], [ 2 ] ] )]]></Example>
     </Description>
     </ManSection>
 <#/GAPDoc>
@@ -208,12 +203,11 @@ rec( flows := [ [  ], [ 1, 0 ], [ 1 ] ], maxFlow := 1,
         If <A>p</A> is not specified, then a random probability will be assumed
         (chosen with uniform probability).<P/>
     <Example><![CDATA[
-gap> g := RandomUniqueEdgeWeightedDigraph(IsStronglyConnectedDigraph, 5, 1);
+gap> g := RandomUniqueEdgeWeightedDigraph(
+>     IsStronglyConnectedDigraph, 5, 1);
 <immutable digraph with 5 vertices, 25 edges>
-gap> g := RandomUniqueEdgeWeightedDigraph(5, 1);                            
-<immutable digraph with 5 vertices, 25 edges>
-    ]]>
-    </Example>
+gap> g := RandomUniqueEdgeWeightedDigraph(5, 1);
+<immutable digraph with 5 vertices, 25 edges>]]></Example>
     </Description>
     </ManSection>
 <#/GAPDoc>
@@ -231,12 +225,10 @@ gap> g := RandomUniqueEdgeWeightedDigraph(5, 1);
 gap> g := EdgeWeightedDigraph([[2],[3],[]],[[2],[1],[]]);
 <immutable digraph with 3 vertices, 2 edges>
 gap> sp := DigraphEdgeWeightedShortestPath(g, 1);
-rec( distances := [ 0, 2, 3 ], edges := [ fail, 1, 1 ],
+rec( distances := [ 0, 2, 3 ], edges := [ fail, 1, 1 ], 
   parents := [ fail, 1, 2 ] )
 gap> sd := DigraphFromPaths(g, sp);
-<immutable digraph with 3 vertices, 2 edges>
-    ]]>
-    </Example>
+<immutable digraph with 3 vertices, 2 edges>]]></Example>
     </Description>
     </ManSection>
 <#/GAPDoc>
@@ -255,15 +247,12 @@ gap> sd := DigraphFromPaths(g, sp);
 gap> g := EdgeWeightedDigraph([[2],[3],[]],[[2],[1],[]]);
 <immutable digraph with 3 vertices, 2 edges>
 gap> sp := DigraphEdgeWeightedShortestPath(g, 1);
-rec( distances := [ 0, 2, 3 ], edges := [ fail, 1, 1 ],
+rec( distances := [ 0, 2, 3 ], edges := [ fail, 1, 1 ], 
   parents := [ fail, 1, 2 ] )
 gap> sd := DigraphFromPath(g, sp, 3);
 <immutable digraph with 3 vertices, 2 edges>
 gap> sd := DigraphFromPath(g, sp, 2);
-<immutable digraph with 3 vertices, 1 edge>
-
-    ]]>
-    </Example>
+<immutable digraph with 3 vertices, 1 edge>]]></Example>
     </Description>
     </ManSection>
 <#/GAPDoc>
@@ -289,17 +278,14 @@ gap> sd := DigraphFromPath(g, sp, 2);
 gap> g := EdgeWeightedDigraph([[2],[3],[]],[[2],[1],[]]);
 <immutable digraph with 3 vertices, 2 edges>
 gap> sp := DigraphEdgeWeightedShortestPath(g, 1);
-rec( distances := [ 0, 2, 3 ], edges := [ fail, 1, 1 ],
+rec( distances := [ 0, 2, 3 ], edges := [ fail, 1, 1 ], 
   parents := [ fail, 1, 2 ] )
 gap> sd := DigraphFromPath(g, sp, 3);
 <immutable digraph with 3 vertices, 2 edges>
 gap> DotEdgeWeightedDigraph(g, sd, rec());
 "//dot\ndigraph hgn{\nnode [shape=circle]\n1[color=lightpink, style=fi\
 lled]\n2[color=lightpink, style=filled]\n3[color=lightpink, style=fill\
-ed]\n1 -> 2[color=blue, label=2]\n2 -> 3[color=blue, label=1]\n}\n"
-
-]]>
-    </Example>
+ed]\n1 -> 2[color=blue, label=2]\n2 -> 3[color=blue, label=1]\n}\n"]]></Example>
     </Description>
     </ManSection>
 <#/GAPDoc>
